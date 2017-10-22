@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint index.js",
     "precommit": "lint-staged",
-    "prettier": "prettier --single-quote --trailing-comma es5 --no-semi --write \"index.js\"",
+    "prettier": "prettier --print-width 80 --single-quote --trailing-comma es5 --no-semi --write \"index.js\"",
     "build": "babel index.js --out-dir lib",
     "prepublish": "npm run build"
   },

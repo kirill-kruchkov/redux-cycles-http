@@ -25,6 +25,7 @@
     "import/extensions": ["error", "never", { "svg": "always" }],
     "comma-dangle": "off",
     "arrow-parens": "off",
+    "object-curly-newline": "off",
     "no-use-before-define": ["error", { "functions": false, "classes": false }],
     "no-param-reassign": [
       "off",

@@ -44,13 +44,14 @@ run(cycles, {
 ### Dispatch actions
 
 ```
-import { httpAction } from 'redux-cycles-http'
-
 export function somedataFetch(id) {
-  return httpAction(ACTION_TYPE, {
-    url: `${API_ENDPOINT}/path/${encodeURIComponent(id)}`,
-    method: 'GET',
-  })
+  return {
+    type: ACTION_TYPE,
+    request: {
+      url: `${API_ENDPOINT}/path/${encodeURIComponent(id)}`,
+      method: 'GET',
+    }
+  }
 }
 
 ```
@@ -58,8 +59,6 @@ export function somedataFetch(id) {
 ### Match it in reducer
 
 ```
-import { httpAction } from 'redux-cycles-http'
-
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case success(ACTION_TYPE):
@@ -72,6 +71,11 @@ export default function reducer(state = INITIAL_STATE, action) {
   }
 }
 ```
+
+Success action payload contains:
+- `data` - response data,
+- `request` - request matching this response,
+- `initial` - initial action payload.
 
 ### Waiting for requests to finish
 

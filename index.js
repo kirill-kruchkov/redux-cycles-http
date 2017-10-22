@@ -5,12 +5,6 @@ export const success = type => `${type}_${SUCCESS}`
 
 export const error = type => `${type}_${ERROR}`
 
-export const httpAction = (type, request) => ({
-  type,
-  request,
-  isHttp: true,
-})
-
 export default function httpCycle(sources) {
   const request$ = sources.ACTION.filter(isHttpAction).map(action => ({
     ...action.request,
@@ -21,7 +15,7 @@ export default function httpCycle(sources) {
     .select()
     .flatten() // auto cancels prev of simultaneous reqs to same source
     .map(response => {
-      const { type, completed, request } = response.request.category
+      const { type, completed, request, payload } = response.request.category
       if (typeof completed === 'function') {
         setTimeout(completed.bind(null, response), 0)
       }
@@ -30,6 +24,7 @@ export default function httpCycle(sources) {
         payload: {
           data: response.body,
           request,
+          initial: payload,
         },
       }
     })
@@ -49,5 +44,5 @@ export const awaitable = action => dispatch =>
   )
 
 function isHttpAction(action) {
-  return action.isHttp && action.request
+  return action.request && typeof action.request === 'object'
 }
