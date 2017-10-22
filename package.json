@@ -2,18 +2,18 @@
   "name": "redux-cycles-http",
   "version": "0.1.2",
   "description": "Default HTTP flow cycle to use with `redux-cycles`",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint index.js",
     "precommit": "lint-staged",
     "prettier": "prettier --single-quote --trailing-comma es5 --no-semi --write \"index.js\"",
-    "build": "babel index.js --out-dir dist",
+    "build": "babel index.js --out-dir lib",
     "prepublish": "npm run build"
   },
   "lint-staged": {
     "*.js": [
-      "prettier",
+      "npm run prettier",
       "eslint",
       "git add"
     ]
