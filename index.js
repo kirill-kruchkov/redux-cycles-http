@@ -21,13 +21,16 @@ export default function httpCycle(sources) {
     .select()
     .flatten() // auto cancels prev of simultaneous reqs to same source
     .map(response => {
-      const { type, completed } = response.request.category
+      const { type, completed, request } = response.request.category
       if (typeof completed === 'function') {
         setTimeout(completed.bind(null, response), 0)
       }
       return {
         type: success(type),
-        payload: response.body,
+        payload: {
+          data: response.body,
+          request,
+        },
       }
     })
 
