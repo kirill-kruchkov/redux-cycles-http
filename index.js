@@ -23,7 +23,7 @@ export default function httpCycle(sources) {
     .map(response => {
       const { type, completed } = response.request.category
       if (typeof completed === 'function') {
-        setTimeout(completed, 0)
+        setTimeout(completed.bind(null, response), 0)
       }
       return {
         type: success(type),

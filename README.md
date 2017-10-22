@@ -72,3 +72,38 @@ export default function reducer(state = INITIAL_STATE, action) {
   }
 }
 ```
+
+### Waiting for requests to finish
+
+E.g. if you need it for server side rendering.
+
+*NB!* This requires `redux-thunk` or similar middleware.
+
+```
+import { awaitable } from 'redux-cycles-http'
+
+static async getInitialProps({ query, store, isServer }) {
+  const { id } = query
+  await store.dispatch(awaitable(somedataFetch(id)))
+  return { isServer }
+}
+
+```
+
+or
+
+
+```
+import { awaitable } from 'redux-cycles-http'
+
+function getInitialActions() {
+  const awaitableFetch = awaitable(somedataFetch())
+  return store.dispatch(awaitableFetch).then(response => {
+    console.log('My data:', response.body)
+    return response
+  })
+}
+
+```
+
+
