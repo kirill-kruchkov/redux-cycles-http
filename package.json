@@ -1,0 +1,57 @@
+{
+  "name": "redux-cycles-http",
+  "version": "0.1.0",
+  "description": "Default HTTP flow cycle to use with `redux-cycles`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint index.js",
+    "precommit": "lint-staged",
+    "prettier": "prettier --single-quote --trailing-comma es5 --no-semi --write \"index.js\"",
+    "build": "babel index.js --out-dir dist"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier",
+      "eslint",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": "^7.4.0",
+    "yarn": "^1.0.1",
+    "npm": "^4.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirill-kruchkov/redux-cycles-http.git"
+  },
+  "keywords": [
+    "redux",
+    "cycle.js",
+    "redux-cycles",
+    "http"
+  ],
+  "author": {
+    "email": "kirill.kruchkov@gmail.com",
+    "name": "Kirill Kriuchkov"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kirill-kruchkov/redux-cycles-http/issues"
+  },
+  "homepage": "https://github.com/kirill-kruchkov/redux-cycles-http#readme",
+  "devDependencies": {
+    "babel-cli": "6",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "prettier": "^1.7.4"
+  }
+}
