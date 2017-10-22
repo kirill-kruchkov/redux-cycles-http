@@ -8,7 +8,8 @@
     "lint": "eslint index.js",
     "precommit": "lint-staged",
     "prettier": "prettier --single-quote --trailing-comma es5 --no-semi --write \"index.js\"",
-    "build": "babel index.js --out-dir dist"
+    "build": "babel index.js --out-dir dist",
+    "prepublish": "npm run build"
   },
   "lint-staged": {
     "*.js": [

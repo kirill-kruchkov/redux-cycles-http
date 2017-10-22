@@ -18,18 +18,24 @@ npm install --save redux-cycles-http
 
 ### Setup
 
-Setup `redux-cycles` as usual along with Cycle.js HTTP driver:
+Setup `redux-cycles` as usual along with Cycle.js HTTP driver and add `httpCycle` to your cycles:
 
 ```
 import { createCycleMiddleware } from 'redux-cycles'
 import { run } from '@cycle/run'
 import { makeHTTPDriver } from '@cycle/http'
+import { combineCycles } from 'redux-cycles'
+import httpCycle from 'redux-cycles-http'
 
 const cycleMiddleware = createCycleMiddleware()
 const { makeActionDriver } = cycleMiddleware
 const middlewares = [cycleMiddleware]
 
-run(main, {
+export const cycles = combineCycles(
+  httpCycle
+)
+
+run(cycles, {
   ACTION: makeActionDriver(),
   HTTP: makeHTTPDriver(),
 })
