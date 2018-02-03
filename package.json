@@ -1,6 +1,9 @@
 {
   "name": "redux-cycles-http",
-  "version": "0.1.6",
+  "version": "0.1.7",
+  "publishConfig": {
+    "tag": "latest"
+  },
   "description": "Default HTTP flow cycle to use with `redux-cycles`",
   "main": "lib/index.js",
   "scripts": {
@@ -19,9 +22,9 @@
     ]
   },
   "engines": {
-    "node": "^7.4.0",
-    "yarn": "^1.0.1",
-    "npm": "^4.0.5"
+    "node": ">=7.4.0",
+    "yarn": ">=1.0.1",
+    "npm": ">=4.0.5"
   },
   "repository": {
     "type": "git",

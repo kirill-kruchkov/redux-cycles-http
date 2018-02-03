@@ -11,8 +11,7 @@ export default function httpCycle(sources) {
     category: action,
   }))
 
-  const action$ = sources.HTTP
-    .select()
+  const action$ = sources.HTTP.select()
     .flatten() // auto cancels prev of simultaneous reqs to same source
     .map(response => {
       const { type, completed, request, payload } = response.request.category
