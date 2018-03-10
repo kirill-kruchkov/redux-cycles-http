@@ -1,6 +1,6 @@
 {
   "name": "redux-cycles-http",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "publishConfig": {
     "tag": "latest"
   },
@@ -10,8 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint index.js",
     "precommit": "lint-staged",
-    "prettier": "prettier --print-width 80 --single-quote --trailing-comma es5 --no-semi --write \"index.js\"",
+    "prettier": "prettier --config package.json --write \"index.js\"",
     "build": "babel index.js --out-dir lib",
+    "build:watch": "nodemon --watch index.js --ignore lib/ --exec yarn run build",
     "prepublish": "npm run build"
   },
   "lint-staged": {
@@ -20,6 +21,12 @@
       "eslint",
       "git add"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 80,
+    "semi": false
   },
   "engines": {
     "node": ">=7.4.0",
@@ -46,7 +53,7 @@
   },
   "homepage": "https://github.com/kirill-kruchkov/redux-cycles-http#readme",
   "devDependencies": {
-    "babel-cli": "6",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -56,6 +63,13 @@
     "eslint-plugin-prettier": "^2.3.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.3.0",
+    "nodemon": "^1.17.1",
     "prettier": "^1.7.4"
+  },
+  "peerDependencies": {
+    "redux-thunk": "^2.2.0",
+    "redux": "^3.7.2",
+    "redux-cycles":" ^0.4.1",
+    "xstream": "^11.2.0"
   }
 }

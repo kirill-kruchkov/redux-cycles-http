@@ -1,27 +1,49 @@
+import xs from 'xstream'
+
 const SUCCESS = 'SUCCESS'
 const ERROR = 'ERROR'
 
-export const success = type => `${type}_${SUCCESS}`
+export const success = type => `http/${type}_${SUCCESS}`
 
-export const error = type => `${type}_${ERROR}`
+export const error = type => `http/${type}_${ERROR}`
 
-export default function httpCycle(sources) {
-  const request$ = sources.ACTION.filter(isHttpAction).map(action => ({
+export default function httpCycle({ ACTION, HTTP }) {
+  const request$ = ACTION.filter(isHttpAction).map(action => ({
     ...action.request,
     category: action,
   }))
 
-  const action$ = sources.HTTP.select()
-    .flatten() // auto cancels prev of simultaneous reqs to same source
+  const action$ = HTTP.select()
+    .map(response$ => response$.replaceError(err => xs.of(err)))
+    .flatten()
     .map(response => {
-      const { type, completed, request, payload } = response.request.category
+      const { type, completed, request, payload } =
+        (response && response.request && response.request.category) || {}
       if (typeof completed === 'function') {
         setTimeout(completed.bind(null, response), 0)
+      }
+      if (typeof type === 'undefined') {
+        return {
+          type: `http/${ERROR}`,
+          payload: response,
+        }
+      }
+      if (!response.ok) {
+        return {
+          type: error(type),
+          payload: {
+            data: response.body,
+            headers: response.headers,
+            request,
+            initial: payload,
+          },
+        }
       }
       return {
         type: success(type),
         payload: {
           data: response.body,
+          headers: response.headers,
           request,
           initial: payload,
         },
@@ -43,5 +65,5 @@ export const awaitable = action => dispatch =>
   )
 
 function isHttpAction(action) {
-  return action.request && typeof action.request === 'object'
+  return Boolean(action.request && typeof action.request === 'object')
 }

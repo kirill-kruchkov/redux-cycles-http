@@ -23,6 +23,7 @@
     "space-before-function-paren": "off",
     "function-paren-newline": "off",
     "import/extensions": ["error", "never", { "svg": "always" }],
+    "import/no-unresolved": ["error", { "ignore": ["xstream"] }],
     "comma-dangle": "off",
     "arrow-parens": "off",
     "object-curly-newline": "off",
@@ -34,10 +35,5 @@
         "ignorePropertyModificationsFor": ["store", "accumulator"]
       }
     ]
-  },
-  "settings": {
-    "import/resolver": {
-      "babel-module": {}
-    }
   }
 }
