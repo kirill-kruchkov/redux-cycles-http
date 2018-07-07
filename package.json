@@ -1,6 +1,6 @@
 {
   "name": "redux-cycles-http",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "publishConfig": {
     "tag": "latest"
   },
@@ -67,6 +67,7 @@
     "prettier": "^1.7.4"
   },
   "peerDependencies": {
+    "@cycle/http": "^14.9.0",
     "redux-thunk": "^2.2.0",
     "redux": "^3.7.2",
     "redux-cycles":" ^0.4.1",

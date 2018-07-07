@@ -16,7 +16,8 @@ export default function httpCycle({ ACTION, HTTP }) {
   const action$ = HTTP.select()
     .map(response$ => response$.replaceError(err => xs.of(err)))
     .flatten()
-    .map(response => {
+    .map(result => {
+      const response = result.response || result
       const { type, completed, request, payload } =
         (response && response.request && response.request.category) || {}
       if (typeof completed === 'function') {
